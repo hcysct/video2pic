@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weixin.api.mapper.UserMapper">
+	<sql id="userColumns">
+		id,
+		name
+	</sql>
+	<resultMap id="UserMap" type="User">
+		<id column="id" property="id" />
+		<id column="name" property="name" />
+	</resultMap>
+	<select id="queryUserById" parameterType="java.lang.Long" resultType="User">
+		SELECT <include refid="userColumns"></include> 
+			from user where id=#{id}
+	</select>
+	
+	<select id="queryUserListByName" parameterType="java.lang.String"  resultType="User">
+		SELECT <include refid="userColumns"></include> 
+			from user 
+			<where>
+				<if test="_parameter!= null">
+	  				name=#{username}
+		  		</if>
+			</where>
+	</select>
+	
+</mapper>

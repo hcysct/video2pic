@@ -13,9 +13,8 @@ import com.demo.video2pic.model.User;
 import com.demo.video2pic.service.TestService;
 
 /**
- * 微信关联平台活动业务方法
  *
- * Created by zyh on 2015/11/30.
+ * 
  */
 @Service
 public class TestServiceImpl implements TestService {

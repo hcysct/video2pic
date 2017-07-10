@@ -31,24 +31,25 @@ public class JaveTest {
 	 * 将视频转为图片
 	 */
 	public static void toPng() {
-		String sourcePath="D:\\test2\\1CG.mp4";
-		String targetOriginPath="D:\\test2\\1CG_";//默认图片名称
+		String sourcePath="D:\\test\\gee.mp4";
+		String targetOriginPath="D:\\test\\gee_";//默认图片名称
+		String targetStyle="png";
 		File source = new File(sourcePath);//原始视频地址
-		
 		Encoder encoder = new Encoder();//转码工具类
 		VideoAttributes video = new VideoAttributes();
 		MultimediaInfo mi;
 		int videoTime=0;
 		try {
+			long beginTime = System.currentTimeMillis();
 			mi = encoder.getInfo(source);
+			//获取时长
+			 System.out.println("获取时长花费时间是：" + (System.currentTimeMillis() - beginTime));
 			videoTime=(int) (mi.getDuration()/1000);
 			//获取视频分辨率
 			int width=mi.getVideo().getSize().getWidth();//宽
 			int height=mi.getVideo().getSize().getHeight();//高
-			
-			video.setCodec("png");//转图片格式
+			video.setCodec(targetStyle);//转图片格式
 			video.setSize(new VideoSize(width, height));//调整图片生成的分辨率
-			
 			System.out.println(mi.getDuration());
 		} catch (InputFormatException e1) {
 			// TODO Auto-generated catch block
@@ -63,15 +64,9 @@ public class JaveTest {
 			attrs.setOffset((float)i);//设置偏移位置，即开始转码位置（秒）
 			attrs.setDuration(0.01f);//设置转码持续时间（1秒）
 			attrs.setVideoAttributes(video);
-			
-			long beginTime = System.currentTimeMillis();
 			try {
-				//获取时长
-				 MultimediaInfo m = encoder.getInfo(source);
-				 System.out.println(m.getDuration());
-				 System.out.println("获取时长花费时间是：" + (System.currentTimeMillis() - beginTime));
-				 beginTime = System.currentTimeMillis();
-				 String targetPath=targetOriginPath+i+".png";//循环生成的图片地址
+				long beginTime = System.currentTimeMillis();
+				 String targetPath=targetOriginPath+i+"."+targetStyle;//循环生成的图片地址
 				 File target = new File(targetPath);//转图片地址  4.png
 				encoder.encode(source, target, attrs);
 				System.out.println("视频转码花费时间是：" + (System.currentTimeMillis() - beginTime));

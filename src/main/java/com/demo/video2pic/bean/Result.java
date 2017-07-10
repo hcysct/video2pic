@@ -4,31 +4,18 @@ import java.io.Serializable;
 
 
 /**
- *
+ * 结果集
  */
 public class Result implements Serializable{
+	//true false
 	private boolean success = true;
-	private int retCode = 0;
+	//0 -1
+	private int resultCode = 0;
+	//消息
 	private String msg;
-	private Object retObj;
+	private Object resultObj;
 
 	public Result() {}
-
-	public Result(boolean success, int retCode, String msg, Object retObj) {
-		this.success = success;
-		this.retCode = retCode;
-		this.msg = msg;
-		this.retObj = retObj;
-	}
-
-	public Result(Object object) {
-		this.retObj = object;
-	}
-
-	public Result(int code, Object object) {
-		this.retCode = code;
-		this.retObj = object;
-	}
 
 	public boolean isSuccess() {
 		return success;
@@ -38,12 +25,12 @@ public class Result implements Serializable{
 		this.success = success;
 	}
 
-	public int getRetCode() {
-		return retCode;
+	public int getResultCode() {
+		return resultCode;
 	}
 
-	public void setRetCode(int retCode) {
-		this.retCode = retCode;
+	public void setResultCode(int resultCode) {
+		this.resultCode = resultCode;
 	}
 
 	public String getMsg() {
@@ -54,12 +41,22 @@ public class Result implements Serializable{
 		this.msg = msg;
 	}
 
-	public Object getRetObj() {
-		return retObj;
+	public Object getResultObj() {
+		return resultObj;
 	}
 
-	public void setRetObj(Object retObj) {
-		this.retObj = retObj;
+	public void setResultObj(Object resultObj) {
+		this.resultObj = resultObj;
 	}
+
+	public Result(boolean success, int resultCode, String msg, Object resultObj) {
+		super();
+		this.success = success;
+		this.resultCode = resultCode;
+		this.msg = msg;
+		this.resultObj = resultObj;
+	}
+
+
 
 }

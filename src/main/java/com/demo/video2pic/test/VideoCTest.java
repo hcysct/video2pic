@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Test {
+public class VideoCTest {
 	// 视频缩略图截取
 	// inFile 输入文件(包括完整路径)
 	// outFile 输出文件(可包括完整路径)
@@ -33,7 +33,7 @@ public class Test {
 	public static void main(String[] arg){
 		String inFile ="/home/local/test/test.mp4";
 		String outFile ="/home/local/test/test.jpg";
-		boolean transfer = Test.transfer(inFile, outFile,"0");
+		boolean transfer = VideoCTest.transfer(inFile, outFile,"0");
 		System.out.print(transfer);
 	}
 	

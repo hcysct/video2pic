@@ -26,7 +26,7 @@ public class TestController {
 	@Resource
 	private TestService testService;
 
-	@RequestMapping(value = "/test.do",method=RequestMethod.GET)
+	@RequestMapping(value = "/test",method=RequestMethod.GET)
 	@ResponseBody
 	public String detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Result result=new Result();

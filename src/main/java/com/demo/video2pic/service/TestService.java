@@ -14,4 +14,5 @@ public interface TestService {
 	 * 视频转换为图片
 	 */
 	public void toPng();
+	
 }

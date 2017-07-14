@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,41 +87,72 @@ public class TVDisplayController {
     @RequestMapping("/esUserScaleMonthly")
     @ResponseBody
     public String esUserScaleMonthly(HttpServletResponse response, HttpServletRequest request) {
-       	Result result=new Result();
+    	String type=request.getParameter("type");
+    	Result result=new Result();
+    	Map resultObj=new HashMap();
+    	
+		if(StringUtils.isEmpty(type)||type.equals("0")){
+			Map packageStructure=new HashMap();
+  	        packageStructure.put("hiCard", "10");
+  	        packageStructure.put("dailyRentCard", "20");
+  	        packageStructure.put("iFreeCard", "30");
+  	        packageStructure.put("other", "40");
+  	        resultObj.put("packageStructure", packageStructure);
+  	        Map talkTime=new HashMap();
+  	        talkTime.put("0-120", "10");
+  	        talkTime.put("120-480", "20");
+  	        talkTime.put("480-1000", "30");
+  	        talkTime.put("1000+", "40");
+  	        resultObj.put("talkTime", talkTime);
+  	        Map income=new HashMap();
+  	        income.put("0-20", "10");
+  	        income.put("20-100", "20");//30-100在哪里
+  	        income.put("100-300", "30");
+  	        income.put("300+", "40");
+  	        resultObj.put("income", income);
+  	        Map flowConsumption=new HashMap();
+  	        flowConsumption.put("0-500M", "10");
+  	        flowConsumption.put("500M-1G", "20");
+  	        flowConsumption.put("1G-3G", "30");
+  	        flowConsumption.put("3G+", "40");
+  	        resultObj.put("flowConsumption", flowConsumption);
+		}else if(type.equals("2")){//当月户均通话时长
+	        Map talkTime=new HashMap();
+	        talkTime.put("0-120", "10");
+	        talkTime.put("120-480", "20");
+	        talkTime.put("480-1000", "30");
+	        talkTime.put("1000+", "40");
+	        resultObj.put("talkTime", talkTime);
+		}else if(type.equals("3")){//当月户均收入
+	        Map income=new HashMap();
+	        income.put("0-20", "10");
+	        income.put("20-100", "20");//30-100在哪里
+	        income.put("100-300", "30");
+	        income.put("300+", "40");
+	        resultObj.put("income", income);
+		}else if(type.equals("4")){//当月户均流量消费
+	        Map flowConsumption=new HashMap();
+	        flowConsumption.put("0-500M", "10");
+	        flowConsumption.put("500M-1G", "20");
+	        flowConsumption.put("1G-3G", "30");
+	        flowConsumption.put("3G+", "40");
+	        resultObj.put("flowConsumption", flowConsumption);
+		}else if(type.equals("1")){//1：当月套餐结构
+	        Map packageStructure=new HashMap();
+	        packageStructure.put("hiCard", "10");
+	        packageStructure.put("dailyRentCard", "20");
+	        packageStructure.put("iFreeCard", "30");
+	        packageStructure.put("other", "40");
+	        resultObj.put("packageStructure", packageStructure);
+		}else {
+			result.setResultCode(Constant.ACTION_FAILED);
+			result.setSuccess(false);
+			result.setMsg("参数错误!");
+		 	return JSONObject.fromObject(result).toString();
+		}
        	result.setMsg("操作成功");
        	result.setResultCode(Constant.SUCCESS);
        	result.setSuccess(true);
-       	
-        Map resultObj=new HashMap();
-        
-        Map packageStructure=new HashMap();
-        packageStructure.put("hiCard", "10");
-        packageStructure.put("dailyRentCard", "20");
-        packageStructure.put("iFreeCard", "30");
-        packageStructure.put("other", "40");
-        resultObj.put("packageStructure", packageStructure);
-        
-        Map talkTime=new HashMap();
-        talkTime.put("0-120", "10");
-        talkTime.put("120-480", "20");
-        talkTime.put("480-1000", "30");
-        talkTime.put("1000+", "40");
-        resultObj.put("talkTime", talkTime);
-        
-        Map income=new HashMap();
-        income.put("0-20", "10");
-        income.put("20-100", "20");//30-100在哪里
-        income.put("100-300", "30");
-        income.put("300+", "40");
-        resultObj.put("income", income);
-        
-        Map flowConsumption=new HashMap();
-        flowConsumption.put("0-500M", "10");
-        flowConsumption.put("500M-1G", "20");
-        flowConsumption.put("1G-3G", "30");
-        flowConsumption.put("3G+", "40");
-        resultObj.put("flowConsumption", flowConsumption);
-        
         result.setResultObj(resultObj);
        	return JSONObject.fromObject(result).toString();
     }
@@ -308,7 +340,7 @@ public class TVDisplayController {
         resultObj.put("monthlyPackage",10);
         resultObj.put("snacksPackage", 20);
         resultObj.put("shortBigPackage", 30);
-        resultObj.put("contentPackage ", 40);
+        resultObj.put("contentPackage", 40);
         result.setResultObj(resultObj);
        	return JSONObject.fromObject(result).toString();
     }

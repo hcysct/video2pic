@@ -18,7 +18,7 @@ import com.demo.video2pic.utils.Constant;
 import net.sf.json.JSONObject;
 
 /** 
- * <Description>勇刚总电视可视化<br> 
+ * <Description>电视可视化<br> 
  *  
  * @author zyh<br>
  * @version 1.0<br>

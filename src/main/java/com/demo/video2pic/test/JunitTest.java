@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.demo.video2pic.ffmpeg.FFmpegUtil;
 import com.demo.video2pic.service.TestService;
+
 
 /**
  *
@@ -24,7 +26,9 @@ public class JunitTest {
 	 */
 	@Test
 	public void queryGroupFamily() {
-		testService.toPng();
+//		FFmpegUtil.getVideoInfo("D:/test/gee.avi");
+		//FFmpegUtil.getVideoTitleFromPath("D:/test/gee.avi");
+		FFmpegUtil.videoToPic("D:/test/gee.avi","D:/test","png");
 		System.out.println("1223");
 	}
 	

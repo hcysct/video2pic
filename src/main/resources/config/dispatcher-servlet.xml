@@ -25,7 +25,10 @@
        <context:component-scan base-package="com.demo.video2pic" use-default-filters="false">
               <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
        </context:component-scan>
-
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="UTF-8">
+	       <property name="maxUploadSize" value="1000000000" />
+	       <property name="maxInMemorySize" value="1000000000" />
+	</bean>
        <bean id="jspResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-             p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" p:order="1" />
+             p:prefix="/WEB-INF/views/" p:suffix=".jsp" p:order="1" />
 </beans>

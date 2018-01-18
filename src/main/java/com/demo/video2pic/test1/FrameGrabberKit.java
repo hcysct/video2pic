@@ -1,4 +1,4 @@
-package com.demo.video2pic.test;
+package com.demo.video2pic.test1;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
